@@ -1,0 +1,5 @@
+# pnpm 11 的构建设置（pnpm 11 起不再读取 package.json 中的 pnpm 字段）
+# 允许 esbuild / workerd 执行构建脚本，否则 strictDepBuilds 会让安装失败
+allowBuilds:
+  esbuild: true
+  workerd: true
