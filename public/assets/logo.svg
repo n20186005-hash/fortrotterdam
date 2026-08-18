@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" role="img" aria-labelledby="title desc">
+  <title id="title">Panduan Benteng Rotterdam</title>
+  <desc id="desc">Simbol atap benteng, gerbang, dan gelombang laut Makassar.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 72h112" stroke="#173b3f" stroke-width="5"/>
+    <path d="M31 70V43l43-27 43 27v27" fill="#f4e4bd" stroke="#8a3428" stroke-width="5"/>
+    <path d="M43 42h62M55 34h38" stroke="#b68b4a" stroke-width="4"/>
+    <path d="M65 70V51a9 9 0 0 1 18 0v19" fill="#173b3f" stroke="#173b3f" stroke-width="4"/>
+    <path d="M17 86c16-10 31-10 47 0 16 10 31 10 47 0 10-6 20-8 31-5" stroke="#28747a" stroke-width="5"/>
+    <path d="M29 99c14-7 28-7 42 0 14 7 28 7 42 0" stroke="#b68b4a" stroke-width="4"/>
+  </g>
+  <text x="164" y="51" font-family="Georgia, 'Times New Roman', serif" font-size="32" font-weight="700" fill="#173b3f">Benteng Rotterdam</text>
+  <text x="166" y="83" font-family="Arial, Helvetica, sans-serif" font-size="16" letter-spacing="3" font-weight="700" fill="#8a3428">PANDUAN MAKASSAR</text>
+</svg>

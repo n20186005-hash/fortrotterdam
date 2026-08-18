@@ -1,0 +1,389 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import LegalDialogs from '../components/LegalDialogs.astro';
+
+const title = 'Benteng Rotterdam Makassar — Panduan Sejarah & Kunjungan';
+const description = 'Panduan nirlaba Benteng Rotterdam di Makassar: sejarah Gowa–Tallo, Museum La Galigo, jam kunjung, biaya, transportasi, parkir, fasilitas, kuliner lokal, peta, dan FAQ.';
+const pageUrl = Astro.site ? new URL('/', Astro.site).href : undefined;
+const imageUrl = Astro.site ? new URL('/photos/halaman-tengah.webp', Astro.site).href : undefined;
+
+const faqItems = [
+  {
+    q: 'Apakah masuk ke Benteng Rotterdam berbayar?',
+    a: 'Publikasi pariwisata Sulawesi Selatan mencantumkan akses kawasan benteng tanpa tiket masuk umum. Namun Museum La Galigo, kegiatan khusus, parkir, atau layanan tertentu dapat memiliki biaya terpisah. Periksa papan informasi dan petugas saat tiba karena ketentuan dapat berubah.'
+  },
+  {
+    q: 'Jam berapa Benteng Rotterdam buka?',
+    a: 'Daftar Google Maps yang diperiksa untuk panduan ini menampilkan 08.00–18.00 setiap hari. Beberapa sumber resmi pariwisata pernah menampilkan rentang yang berbeda. Untuk kunjungan yang bergantung pada museum atau ruang tertentu, periksa pengumuman resmi dan kondisi di lokasi pada hari kedatangan.'
+  },
+  {
+    q: 'Berapa lama waktu yang ideal untuk berkunjung?',
+    a: 'Untuk melihat halaman, arsitektur, dinding benteng, dan ruang sejarah utama, siapkan sekitar 60–90 menit. Jika ingin membaca koleksi Museum La Galigo dengan lebih tenang, alokasikan sekitar 1,5–2,5 jam.'
+  },
+  {
+    q: 'Bagaimana cara datang dari Bandara Sultan Hasanuddin?',
+    a: 'Pilihan paling langsung adalah taksi resmi bandara atau transportasi berbasis aplikasi menuju Benteng Rotterdam di Jalan Ujung Pandang. Layanan bus regional atau angkutan umum dapat menjadi alternatif, tetapi rute dan jadwal dapat berubah; periksa informasi transportasi bandara pada hari perjalanan.'
+  },
+  {
+    q: 'Apakah tersedia parkir dan toilet?',
+    a: 'Area parkir disebut tersedia pada informasi kunjungan publik, tetapi kapasitas dan tarif dapat berubah. Toilet umumnya terkait area layanan pengunjung atau museum; jam aksesnya dapat mengikuti ruang yang sedang dibuka. Ikuti petunjuk petugas di lokasi.'
+  },
+  {
+    q: 'Apakah Benteng Rotterdam ramah untuk pengguna kursi roda?',
+    a: 'Halaman utama relatif terbuka, tetapi sebagai kompleks cagar budaya terdapat permukaan tidak rata, ambang, tangga, dan beberapa area bertingkat. Pengguna dengan kebutuhan mobilitas sebaiknya memilih rute halaman utama dan menanyakan akses ruang tertentu kepada petugas.'
+  },
+  {
+    q: 'Apakah boleh memotret atau menggunakan drone?',
+    a: 'Fotografi pribadi di area yang diizinkan umumnya menjadi bagian dari kunjungan, tetapi aturan dapat berbeda untuk museum, pemotretan komersial, kegiatan, tripod, dan drone. Jangan menerbangkan drone atau melakukan produksi komersial tanpa memastikan izin pengelola dan aturan penerbangan yang berlaku.'
+  }
+];
+
+const attractionSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['TouristAttraction', 'LocalBusiness'],
+  name: 'Benteng Rotterdam',
+  alternateName: ['Fort Rotterdam', 'Benteng Ujung Pandang', 'Benteng Panyua'],
+  description,
+  ...(pageUrl ? { url: pageUrl } : {}),
+  ...(imageUrl ? { image: [imageUrl] } : {}),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Jl. Ujung Pandang, Bulo Gading',
+    addressLocality: 'Makassar',
+    addressRegion: 'Sulawesi Selatan',
+    postalCode: '90171',
+    addressCountry: 'ID'
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -5.133995051941352,
+    longitude: 119.40305617689843
+  },
+  openingHoursSpecification: [0,1,2,3,4,5,6].map((day) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][day],
+    opens: '08:00',
+    closes: '18:00'
+  })),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.5',
+    bestRating: '5',
+    reviewCount: '14442'
+  }
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a }
+  }))
+};
+---
+<BaseLayout {title} {description}>
+  <a class="skip-link" href="#isi">Lewati ke isi utama</a>
+
+  <header class="relative z-40 border-b border-[#173b3f]/10 bg-[#f7f0df]/92 backdrop-blur">
+    <div class="container-site flex min-h-20 items-center justify-between gap-6 py-3">
+      <a href="#atas" aria-label="Kembali ke awal" class="shrink-0">
+        <img src="/assets/logo.svg" alt="Panduan Benteng Rotterdam" class="h-14 w-auto md:h-16" width="520" height="120" />
+      </a>
+      <nav aria-label="Navigasi utama" class="hidden items-center gap-6 text-sm font-bold lg:flex">
+        <a href="#sejarah" class="hover:text-[#8a3428]">Sejarah</a>
+        <a href="#kunjungan" class="hover:text-[#8a3428]">Kunjungan</a>
+        <a href="#transportasi" class="hover:text-[#8a3428]">Transportasi</a>
+        <a href="#sekitar" class="hover:text-[#8a3428]">Sekitar</a>
+        <a href="#peta" class="hover:text-[#8a3428]">Peta</a>
+        <a href="#faq" class="hover:text-[#8a3428]">FAQ</a>
+      </nav>
+      <a href="#kunjungan" class="rounded-full bg-[#173b3f] px-4 py-2.5 text-sm font-black text-white hover:bg-[#8a3428]">Rencanakan kunjungan</a>
+    </div>
+  </header>
+
+  <main id="isi">
+    <section id="atas" class="relative overflow-hidden pb-20 pt-10 md:pb-28 md:pt-16">
+      <div class="container-site grid items-center gap-12 lg:grid-cols-[1.02fr_.98fr]">
+        <div class="relative z-10">
+          <p class="eyebrow">Cagar sejarah · Makassar, Sulawesi Selatan</p>
+          <h1 class="display-title mt-5 max-w-[820px] text-[#173b3f]">Benteng<br/><span class="text-[#8a3428]">Rotterdam</span></h1>
+          <p class="serif mt-7 max-w-2xl text-xl leading-8 text-[#173b3f]/80 md:text-2xl">Benteng Panyua—jejak maritim Gowa–Tallo, perubahan kota pelabuhan, dan lapisan sejarah kolonial di jantung Makassar.</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#sejarah" class="rounded-full bg-[#8a3428] px-6 py-3 text-sm font-black text-white hover:bg-[#173b3f]">Mulai dari sejarah</a>
+            <a href="#peta" class="rounded-full border border-[#173b3f]/30 bg-white/40 px-6 py-3 text-sm font-black hover:bg-white">Lihat lokasi</a>
+          </div>
+          <div class="mt-10 grid max-w-2xl grid-cols-2 gap-x-6 gap-y-5 border-t border-[#173b3f]/18 pt-6 sm:grid-cols-4">
+            <div><p class="text-xs font-bold uppercase tracking-widest text-[#8a3428]">Dibangun</p><p class="mt-1 font-black">1545</p></div>
+            <div><p class="text-xs font-bold uppercase tracking-widest text-[#8a3428]">Nama awal</p><p class="mt-1 font-black">Ujung Pandang</p></div>
+            <div><p class="text-xs font-bold uppercase tracking-widest text-[#8a3428]">Penilaian peta</p><p class="mt-1 font-black">4,5 / 5</p></div>
+            <div><p class="text-xs font-bold uppercase tracking-widest text-[#8a3428]">Kawasan</p><p class="mt-1 font-black">Ujung Pandang</p></div>
+          </div>
+        </div>
+        <div class="relative mx-auto w-full max-w-[560px] lg:mr-0">
+          <div class="fort-frame arch-clip aspect-[4/5] bg-[#d9c8a5]">
+            <img src="/photos/koridor-benteng.webp" alt="Koridor bangunan berarsitektur kolonial di Benteng Rotterdam" class="h-full w-full object-cover" width="1800" height="1350" fetchpriority="high" />
+          </div>
+          <div class="absolute -bottom-7 -left-3 max-w-[250px] border border-[#173b3f]/15 bg-[#fffaf0] p-4 shadow-xl md:-left-10 md:p-5">
+            <p class="serif text-lg font-bold">“Panyua”</p>
+            <p class="mt-1 text-xs leading-5 text-[#173b3f]/70">Julukan yang merujuk pada bentuk benteng menyerupai penyu—simbol kehidupan di darat dan laut.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="masonry-rule"></div>
+
+    <section class="bg-[#173b3f] py-8 text-[#fffaf0]">
+      <div class="container-site grid gap-6 md:grid-cols-4">
+        <div><p class="text-xs font-black uppercase tracking-widest text-[#e3ba76]">Alamat</p><p class="mt-2 text-sm leading-6">Jl. Ujung Pandang, Bulo Gading, Kec. Ujung Pandang, Kota Makassar 90171</p></div>
+        <div><p class="text-xs font-black uppercase tracking-widest text-[#e3ba76]">Jam pada daftar peta</p><p class="mt-2 text-lg font-black">08.00–18.00</p><p class="text-xs text-white/60">Setiap hari · dapat berubah</p></div>
+        <div><p class="text-xs font-black uppercase tracking-widest text-[#e3ba76]">Biaya kawasan</p><p class="mt-2 text-lg font-black">Tanpa tiket umum*</p><p class="text-xs text-white/60">Museum/kegiatan/parkir dapat terpisah</p></div>
+        <div><p class="text-xs font-black uppercase tracking-widest text-[#e3ba76]">Waktu kunjungan</p><p class="mt-2 text-lg font-black">1,5–2,5 jam</p><p class="text-xs text-white/60">Jika termasuk museum</p></div>
+      </div>
+    </section>
+
+    <section id="sejarah" class="section-space">
+      <div class="container-site grid gap-14 lg:grid-cols-[.75fr_1.25fr]">
+        <div class="lg:sticky lg:top-28 lg:self-start">
+          <p class="eyebrow">Konteks sejarah</p>
+          <h2 class="section-title mt-4">Lebih dari sebuah benteng.</h2>
+          <p class="mt-6 max-w-lg leading-7 text-[#173b3f]/72">Fortifikasi ini membantu membaca perubahan Makassar dari kerajaan maritim, konflik dagang abad ke-17, pusat VOC, masa pengasingan tokoh perlawanan, hingga fungsi cagar budaya dan museum hari ini.</p>
+          <figure class="mt-9 overflow-hidden rounded-[32px] border border-[#173b3f]/10 bg-white/40 p-3">
+            <img src="/photos/halaman-tengah.webp" alt="Halaman hijau dan bangunan Benteng Rotterdam" class="aspect-[3/2] w-full rounded-[24px] object-cover" width="1800" height="1198" loading="lazy" />
+            <figcaption class="px-2 pb-1 pt-3 text-xs leading-5 text-[#173b3f]/60">Kompleks halaman dalam dengan bangunan beratap merah yang mengelilinginya.</figcaption>
+          </figure>
+        </div>
+
+        <div class="timeline-line relative space-y-12 pl-14">
+          <article class="relative">
+            <span class="absolute -left-[52px] top-1 flex size-7 items-center justify-center rounded-full bg-[#8a3428] text-[10px] font-black text-white">01</span>
+            <p class="eyebrow">1545 · Kerajaan Gowa</p>
+            <h3 class="mt-2 text-3xl font-bold">Benteng Ujung Pandang dibangun</h3>
+            <p class="mt-3 leading-7 text-[#173b3f]/72">Sumber pariwisata nasional mencatat pembangunan pada masa Raja Gowa ke-10, I Manrigau Daeng Bonto Karaeng Lakiung Tunipalangga Ulaweng. Benteng menjadi bagian dari sistem pertahanan dan jaringan kota-pelabuhan Gowa–Tallo.</p>
+          </article>
+          <article class="relative">
+            <span class="absolute -left-[52px] top-1 flex size-7 items-center justify-center rounded-full bg-[#8a3428] text-[10px] font-black text-white">02</span>
+            <p class="eyebrow">1667 · Perjanjian Bungaya</p>
+            <h3 class="mt-2 text-3xl font-bold">Titik balik kekuasaan</h3>
+            <p class="mt-3 leading-7 text-[#173b3f]/72">Setelah Perang Gowa, Perjanjian Bungaya menempatkan Benteng Ujung Pandang di bawah kendali VOC. Fortifikasi lain diwajibkan dihancurkan, sementara benteng ini dipertahankan dan menjadi pusat strategis baru.</p>
+          </article>
+          <article class="relative">
+            <span class="absolute -left-[52px] top-1 flex size-7 items-center justify-center rounded-full bg-[#8a3428] text-[10px] font-black text-white">03</span>
+            <p class="eyebrow">Akhir abad ke-17 · VOC</p>
+            <h3 class="mt-2 text-3xl font-bold">Nama Rotterdam dan tata kota baru</h3>
+            <p class="mt-3 leading-7 text-[#173b3f]/72">Cornelis Speelman menamai ulang benteng “Rotterdam” dan VOC membangun kembali kompleks dengan bahasa arsitektur Eropa. Di sekelilingnya tumbuh pusat pemerintahan, perdagangan, permukiman, serta pola kota yang membentuk Makassar kolonial.</p>
+          </article>
+          <article class="relative">
+            <span class="absolute -left-[52px] top-1 flex size-7 items-center justify-center rounded-full bg-[#8a3428] text-[10px] font-black text-white">04</span>
+            <p class="eyebrow">Abad ke-19 · Pengasingan</p>
+            <h3 class="mt-2 text-3xl font-bold">Jejak Pangeran Diponegoro</h3>
+            <p class="mt-3 leading-7 text-[#173b3f]/72">Setelah Perang Jawa, Pangeran Diponegoro diasingkan ke Makassar. Benteng Rotterdam berkaitan erat dengan masa penahanannya pada 1833–1855 dan menjadi salah satu ruang penting untuk memahami politik pengasingan kolonial.</p>
+          </article>
+          <article class="relative">
+            <span class="absolute -left-[52px] top-1 flex size-7 items-center justify-center rounded-full bg-[#8a3428] text-[10px] font-black text-white">05</span>
+            <p class="eyebrow">Masa kini · Cagar budaya</p>
+            <h3 class="mt-2 text-3xl font-bold">Ruang belajar sejarah Sulawesi Selatan</h3>
+            <p class="mt-3 leading-7 text-[#173b3f]/72">Kompleks berfungsi sebagai ruang publik sejarah dan kebudayaan. Museum La Galigo di dalam kawasan menyimpan koleksi yang membantu menjelaskan arkeologi, etnografi, tradisi maritim, serta kebudayaan Bugis–Makassar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space overflow-hidden bg-[#e8d5ae]">
+      <div class="container-site">
+        <div class="grid items-end gap-8 md:grid-cols-[1.2fr_.8fr]">
+          <div><p class="eyebrow">Cara membaca tempat</p><h2 class="section-title mt-4">Arsitektur sebagai arsip.</h2></div>
+          <p class="max-w-xl leading-7 text-[#173b3f]/72">Jangan hanya mencari “spot foto”. Perhatikan garis atap, bukaan pintu dan jendela, halaman, bastion, serta hubungan benteng dengan garis pantai dan kota lama.</p>
+        </div>
+        <div class="mt-12 grid gap-5 md:grid-cols-3">
+          <article class="rounded-[28px] bg-[#fffaf0] p-6 md:-rotate-1"><p class="text-5xl font-black text-[#8a3428]">A</p><h3 class="mt-4 text-2xl font-bold">Bentuk penyu</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/70">Julukan Benteng Panyua menghubungkan bentuk pertahanan dengan simbol penyu yang bergerak di darat dan laut—citra yang sesuai dengan identitas kerajaan maritim.</p></article>
+          <article class="rounded-[28px] bg-[#173b3f] p-6 text-white md:translate-y-8"><p class="text-5xl font-black text-[#e3ba76]">B</p><h3 class="mt-4 text-2xl font-bold">Lapisan Eropa</h3><p class="mt-3 text-sm leading-6 text-white/70">Atap genteng, dinding tebal, bukaan tinggi, bidang atap pelana, dan koridor memperlihatkan pembangunan ulang VOC sekaligus adaptasi terhadap iklim tropis.</p></article>
+          <article class="rounded-[28px] bg-[#8a3428] p-6 text-white md:rotate-1"><p class="text-5xl font-black text-[#f2d79c]">C</p><h3 class="mt-4 text-2xl font-bold">Halaman hidup</h3><p class="mt-3 text-sm leading-6 text-white/75">Ruang terbuka di tengah kompleks membantu orientasi pengunjung dan memperlihatkan hubungan antarbangunan tanpa kehilangan skala benteng.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="kunjungan" class="section-space">
+      <div class="container-site">
+        <p class="eyebrow">Rencana kunjungan</p>
+        <div class="mt-4 grid gap-8 lg:grid-cols-[1fr_.8fr] lg:items-end">
+          <h2 class="section-title">Informasi praktis, tanpa promosi komersial.</h2>
+          <p class="leading-7 text-[#173b3f]/72">Informasi operasional dapat berubah. Gunakan bagian ini untuk merencanakan, lalu cocokkan jam, biaya, akses museum, dan aturan khusus dengan kanal resmi atau petugas di lokasi.</p>
+        </div>
+
+        <div class="mt-12 grid gap-px overflow-hidden rounded-[30px] border border-[#173b3f]/12 bg-[#173b3f]/12 sm:grid-cols-2 lg:grid-cols-4">
+          <article class="bg-[#fffaf0] p-6"><p class="eyebrow">Jam</p><h3 class="mt-3 text-2xl font-bold">08.00–18.00</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/65">Daftar peta saat ini. Sumber resmi berbeda pernah mencantumkan rentang lain; cek kembali sebelum datang.</p></article>
+          <article class="bg-[#fffaf0] p-6"><p class="eyebrow">Biaya</p><h3 class="mt-3 text-2xl font-bold">Kawasan: gratis*</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/65">Museum, acara, parkir, atau layanan khusus dapat memiliki biaya terpisah. Siapkan pembayaran kecil seperlunya.</p></article>
+          <article class="bg-[#fffaf0] p-6"><p class="eyebrow">Durasi</p><h3 class="mt-3 text-2xl font-bold">60–150 menit</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/65">Kunjungan singkat untuk benteng; tambah waktu jika membaca koleksi Museum La Galigo.</p></article>
+          <article class="bg-[#fffaf0] p-6"><p class="eyebrow">Waktu nyaman</p><h3 class="mt-3 text-2xl font-bold">Pagi / sore</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/65">Pagi cenderung lebih sejuk; sore membantu mengurangi paparan panas. Bawa air, topi, dan pelindung matahari.</p></article>
+        </div>
+
+        <div class="mt-14 grid gap-8 lg:grid-cols-2">
+          <div class="overflow-hidden rounded-[34px] bg-[#173b3f] text-white">
+            <img src="/photos/fasad-kolonial.webp" alt="Detail fasad dan koridor Benteng Rotterdam" class="h-64 w-full object-cover" width="960" height="1280" loading="lazy" />
+            <div class="p-7 md:p-8"><p class="eyebrow !text-[#e3ba76]">Urutan yang disarankan</p><ol class="mt-5 space-y-4 text-sm leading-6 text-white/80"><li><strong class="text-white">01 · Orientasi halaman.</strong> Kenali susunan bangunan dan pintu masuk sebelum naik ke area bertingkat.</li><li><strong class="text-white">02 · Museum La Galigo.</strong> Dahulukan museum bila jam operasionalnya lebih pendek daripada kawasan benteng.</li><li><strong class="text-white">03 · Arsitektur & bastion.</strong> Amati dinding, koridor, bidang atap pelana, dan hubungan benteng dengan kota.</li><li><strong class="text-white">04 · Sejarah Diponegoro.</strong> Baca konteks pengasingan, bukan hanya melihat ruang fisiknya.</li></ol></div>
+          </div>
+          <div class="rounded-[34px] border border-[#173b3f]/15 bg-white/45 p-7 md:p-8">
+            <p class="eyebrow">Etika cagar budaya</p>
+            <h3 class="mt-3 text-3xl font-bold">Berkunjung tanpa meninggalkan jejak.</h3>
+            <ul class="mt-6 grid gap-4 text-sm leading-6 text-[#173b3f]/72 sm:grid-cols-2">
+              <li class="border-t border-[#173b3f]/16 pt-4"><strong class="block text-[#173b3f]">Jangan menyentuh atau mencoret</strong> struktur tua, koleksi, dan permukaan rapuh.</li>
+              <li class="border-t border-[#173b3f]/16 pt-4"><strong class="block text-[#173b3f]">Ikuti rambu akses</strong> karena beberapa ruang dapat ditutup untuk konservasi atau kegiatan.</li>
+              <li class="border-t border-[#173b3f]/16 pt-4"><strong class="block text-[#173b3f]">Jaga suara</strong> di museum, ruang sejarah, dan area yang digunakan untuk edukasi.</li>
+              <li class="border-t border-[#173b3f]/16 pt-4"><strong class="block text-[#173b3f]">Bawa kembali sampah</strong> bila tempat sampah tidak tersedia di dekat Anda.</li>
+              <li class="border-t border-[#173b3f]/16 pt-4"><strong class="block text-[#173b3f]">Foto dengan hormat</strong> dan perhatikan larangan di ruang pamer atau acara.</li>
+              <li class="border-t border-[#173b3f]/16 pt-4"><strong class="block text-[#173b3f]">Drone perlu verifikasi izin</strong> pengelola serta aturan keselamatan penerbangan.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="transportasi" class="section-space bg-[#173b3f] text-white">
+      <div class="container-site">
+        <p class="eyebrow !text-[#e3ba76]">Akses ke lokasi</p>
+        <h2 class="section-title mt-4 max-w-4xl">Dari bandara, angkutan kota, taksi, atau kendaraan pribadi.</h2>
+        <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <article class="border-t border-white/20 pt-5"><p class="text-sm font-black text-[#e3ba76]">01 · Bandara Sultan Hasanuddin</p><h3 class="mt-3 text-2xl font-bold">Taksi atau transportasi aplikasi</h3><p class="mt-3 text-sm leading-6 text-white/70">Gunakan titik tujuan “Benteng Rotterdam, Jl. Ujung Pandang”. Bandara berada di luar pusat kota; waktu tempuh sangat dipengaruhi lalu lintas. Pilih layanan resmi dari area penjemputan bandara.</p></article>
+          <article class="border-t border-white/20 pt-5"><p class="text-sm font-black text-[#e3ba76]">02 · Bus / angkutan umum</p><h3 class="mt-3 text-2xl font-bold">Masuk pusat kota, lanjut jarak dekat</h3><p class="mt-3 text-sm leading-6 text-white/70">Layanan bus regional, Trans Sulsel, atau angkutan kota dapat berubah rute dan jadwal. Pastikan layanan yang aktif menuju pusat Makassar, lalu lanjutkan dengan berjalan kaki atau angkutan jarak pendek.</p></article>
+          <article class="border-t border-white/20 pt-5"><p class="text-sm font-black text-[#e3ba76]">03 · Taksi dalam kota</p><h3 class="mt-3 text-2xl font-bold">Tujuan mudah dikenali</h3><p class="mt-3 text-sm leading-6 text-white/70">Sebutkan Benteng Rotterdam di Jalan Ujung Pandang. Minta turun di area akses utama tanpa menghalangi arus jalan dan perhatikan titik penjemputan saat pulang.</p></article>
+          <article class="border-t border-white/20 pt-5"><p class="text-sm font-black text-[#e3ba76]">04 · Kendaraan pribadi</p><h3 class="mt-3 text-2xl font-bold">Pusat kota dapat padat</h3><p class="mt-3 text-sm leading-6 text-white/70">Datang lebih awal pada akhir pekan atau saat ada kegiatan. Ikuti rambu parkir resmi; jangan mengandalkan bahu jalan atau akses yang dapat mengganggu lingkungan cagar budaya.</p></article>
+        </div>
+        <div class="mt-10 rounded-2xl border border-[#e3ba76]/30 bg-white/5 p-5 text-sm leading-6 text-white/75"><strong class="text-white">Catatan pejalan kaki:</strong> Benteng berada dalam koridor pusat kota dan relatif dekat dengan kawasan Losari serta kota lama. Kondisi trotoar, penyeberangan, panas, dan hujan dapat memengaruhi kenyamanan; pilih rute yang aman dan gunakan pelindung matahari.</div>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="container-site">
+        <div class="grid gap-8 lg:grid-cols-[.8fr_1.2fr]">
+          <div><p class="eyebrow">Fasilitas & kebutuhan</p><h2 class="section-title mt-4">Apa yang perlu diketahui sebelum berangkat.</h2><p class="mt-5 max-w-lg leading-7 text-[#173b3f]/70">Sebagian layanan berada di dalam kompleks, sebagian lainnya berada di lingkungan pusat kota. Ketersediaan aktual harus dikonfirmasi di lapangan.</p></div>
+          <div class="grid gap-px overflow-hidden rounded-[28px] border border-[#173b3f]/12 bg-[#173b3f]/12 sm:grid-cols-2">
+            <article class="bg-[#fffaf0] p-5"><h3 class="font-bold">🚻 Toilet</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Umumnya terkait area layanan/museum. Akses dapat mengikuti ruang yang dibuka; tanyakan petugas bila tidak terlihat.</p></article>
+            <article class="bg-[#fffaf0] p-5"><h3 class="font-bold">🅿 Parkir</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Area parkir tersedia menurut informasi kunjungan publik. Kapasitas dan tarif dapat berubah, terutama saat kegiatan.</p></article>
+            <article class="bg-[#fffaf0] p-5"><h3 class="font-bold">♿ Akses mobilitas</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Halaman lebih mudah dilalui daripada tangga/bastion. Permukaan cagar budaya dapat tidak rata dan beberapa ambang cukup tinggi.</p></article>
+            <article class="bg-[#fffaf0] p-5"><h3 class="font-bold">🥤 Air & makanan</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Bawa air minum. Untuk makan, pilih jenis rumah makan atau warung berizin di kawasan pusat kota tanpa bergantung pada penjual di dalam benteng.</p></article>
+            <article class="bg-[#fffaf0] p-5"><h3 class="font-bold">🛏 Akomodasi</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Pusat Makassar memiliki hotel, penginapan, dan akomodasi berbagai kelas. Bandingkan lokasi, akses malam hari, dan kebijakan parkir secara mandiri.</p></article>
+            <article class="bg-[#fffaf0] p-5"><h3 class="font-bold">🛒 Kebutuhan harian</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Minimarket, pasar, apotek, dan toko kebutuhan harian tersedia di kawasan pusat kota; periksa jam layanan setempat.</p></article>
+            <article class="bg-[#fffaf0] p-5"><h3 class="font-bold">⛽ Bahan bakar</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Isi bahan bakar sebelum memasuki pusat kota bila perlu. Gunakan stasiun pengisian resmi dan hindari berhenti di jalur akses benteng.</p></article>
+            <article class="bg-[#fffaf0] p-5"><h3 class="font-bold">⚡ Pengisian kendaraan listrik</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Jangan mengasumsikan benteng memiliki pengisi daya. Cari stasiun pengisian publik yang aktif dan cocok dengan konektor kendaraan sebelum perjalanan.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sekitar" class="section-space bg-[#e8d5ae]">
+      <div class="container-site">
+        <div class="grid gap-8 lg:grid-cols-2">
+          <div>
+            <p class="eyebrow">Kuliner Makassar</p>
+            <h2 class="section-title mt-4">Cari rasa lokal, bukan nama restoran.</h2>
+            <p class="mt-5 leading-7 text-[#173b3f]/70">Untuk menjaga panduan tetap netral dan nonkomersial, kami hanya menyarankan jenis hidangan. Pilih tempat makan berdasarkan kebersihan, harga yang terpampang, kebutuhan diet, dan akses Anda sendiri.</p>
+            <div class="mt-7 flex flex-wrap gap-2">
+              {['Coto Makassar','Sup konro','Pallubasa','Pisang epe','Es pisang ijo','Hidangan laut','Jajanan tradisional'].map((food) => <span class="rounded-full border border-[#173b3f]/20 bg-[#fffaf0]/70 px-4 py-2 text-sm font-bold">{food}</span>)}
+            </div>
+          </div>
+          <figure class="overflow-hidden rounded-[36px] bg-[#173b3f] p-3">
+            <img src="/photos/halaman-acara.webp" alt="Suasana kegiatan di halaman Benteng Rotterdam" class="aspect-[4/3] w-full rounded-[28px] object-cover" width="960" height="1280" loading="lazy" />
+            <figcaption class="px-3 pb-2 pt-3 text-xs leading-5 text-white/60">Ruang halaman juga dapat digunakan untuk kegiatan budaya; kondisi saat berkunjung dapat berbeda dari foto.</figcaption>
+          </figure>
+        </div>
+
+        <div class="mt-16 border-t border-[#173b3f]/20 pt-10">
+          <p class="eyebrow">Tempat bersejarah di sekitar</p>
+          <div class="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            <article class="rounded-2xl bg-[#fffaf0]/70 p-5"><h3 class="text-xl font-bold">Pantai Losari</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Ruang tepi laut ikonik Makassar; cocok dipadukan setelah kunjungan benteng menjelang sore.</p></article>
+            <article class="rounded-2xl bg-[#fffaf0]/70 p-5"><h3 class="text-xl font-bold">Museum Kota Makassar</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Membantu melanjutkan cerita perkembangan kota, administrasi, dan warisan urban Makassar.</p></article>
+            <article class="rounded-2xl bg-[#fffaf0]/70 p-5"><h3 class="text-xl font-bold">Kawasan Kota Lama & Pecinan</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Koridor bersejarah yang menunjukkan perkembangan permukiman dan perdagangan di sekitar pusat kolonial lama.</p></article>
+            <article class="rounded-2xl bg-[#fffaf0]/70 p-5"><h3 class="text-xl font-bold">Pelabuhan Paotere</h3><p class="mt-2 text-sm leading-6 text-[#173b3f]/65">Kawasan pelabuhan tradisional yang memberi konteks tambahan tentang identitas maritim Makassar dan Sulawesi Selatan.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="peta" class="section-space">
+      <div class="container-site grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:items-stretch">
+        <div class="flex flex-col justify-between rounded-[32px] bg-[#8a3428] p-7 text-white md:p-9">
+          <div>
+            <p class="eyebrow !text-[#f2d79c]">Lokasi</p>
+            <h2 class="mt-4 text-4xl font-bold md:text-5xl">Di sisi barat pusat Makassar.</h2>
+            <p class="mt-5 leading-7 text-white/75">Jl. Ujung Pandang, Bulo Gading, Kec. Ujung Pandang, Kota Makassar, Sulawesi Selatan 90171, Indonesia.</p>
+          </div>
+          <div class="mt-10 border-t border-white/20 pt-5 text-sm leading-6 text-white/70">
+            <p><strong class="text-white">Koordinat:</strong><br/>-5.133995, 119.403056</p>
+            <a href="https://maps.app.goo.gl/scD13PUJ1NsUtpGr8" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex rounded-full bg-white px-5 py-2.5 font-black text-[#8a3428]">Buka rute di Google Maps</a>
+          </div>
+        </div>
+        <div class="map-wrap min-h-[450px] overflow-hidden rounded-[32px] border border-[#173b3f]/15 bg-[#d8ccb1]">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6866.20859242991!2d119.40305617689843!3d-5.133995051941352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbf02b011ce37ef%3A0x28ed3928c1b6cf23!2sFort%20Rotterdam!5e1!3m2!1sid!2sid!4v1787019897554!5m2!1sid!2sid&hl=id" title="Peta Benteng Rotterdam di Makassar" width="600" height="450" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section-space bg-[#173b3f] text-white">
+      <div class="container-site grid gap-10 lg:grid-cols-[.62fr_1.38fr]">
+        <div><p class="eyebrow !text-[#e3ba76]">Pertanyaan umum</p><h2 class="section-title mt-4">FAQ sebelum datang.</h2><p class="mt-5 max-w-md text-sm leading-6 text-white/65">Jawaban dirancang konservatif karena jam, biaya, akses ruang, dan layanan lapangan dapat berubah.</p></div>
+        <div class="divide-y divide-white/15 border-y border-white/15">
+          {faqItems.map((item, index) => (
+            <details class="group py-5">
+              <summary class="flex cursor-pointer list-none items-start justify-between gap-5 text-lg font-bold"><span><span class="mr-3 text-sm text-[#e3ba76]">{String(index + 1).padStart(2,'0')}</span>{item.q}</span><span aria-hidden="true" class="text-[#e3ba76] transition group-open:rotate-45">＋</span></summary>
+              <p class="max-w-3xl pb-2 pl-10 pt-4 text-sm leading-7 text-white/68">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="container-site grid gap-10 lg:grid-cols-2">
+        <div>
+          <p class="eyebrow">Sumber & metodologi</p>
+          <h2 class="mt-4 text-4xl font-bold">Informasi diperiksa silang.</h2>
+          <p class="mt-4 leading-7 text-[#173b3f]/70">Panduan membandingkan publikasi Pemerintah Kota Makassar, Dinas Pariwisata Kota Makassar, Dinas Kebudayaan dan Kepariwisataan Provinsi Sulawesi Selatan, Kementerian Pariwisata Republik Indonesia, informasi lokasi Google Maps, serta sumber kebudayaan publik. Jika sumber operasional berbeda, kami menandai ketidakpastian alih-alih menyamarkannya.</p>
+          <p class="mt-4 rounded-2xl border border-[#8a3428]/20 bg-[#8a3428]/6 p-4 text-sm leading-6"><strong>Catatan peringkat:</strong> angka 4,5/5 dan jumlah ulasan pada data terstruktur berasal dari daftar Google Maps yang diperiksa saat penyusunan. Peringkat adalah data pihak ketiga yang dinamis dan dapat berubah.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Kredit foto</p>
+          <h2 class="mt-4 text-4xl font-bold">Foto nyata, disimpan lokal.</h2>
+          <ul class="mt-5 space-y-3 text-sm leading-6 text-[#173b3f]/70">
+            <li><strong>Sekar Jarwo Soekarno</strong> — “Benteng Fort Rotterdam Makassar 3” dan “Benteng Fort Rotterdam Makassar 5”, CC BY-SA 4.0.</li>
+            <li><strong>I Gede Krisna Dharmayudha</strong> — “Bangunan di Fort Rotterdam Makassar”, CC BY-SA 4.0.</li>
+            <li><strong>Sanko</strong> — “Fort Rotterdam, Makassar, Indonesia - 20100227-01”, CC BY-SA 3.0.</li>
+          </ul>
+          <div class="mt-5 flex flex-wrap gap-3 text-xs font-bold">
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" class="underline">Lisensi CC BY-SA 4.0</a>
+            <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer" class="underline">Lisensi CC BY-SA 3.0</a>
+          </div>
+          <p class="mt-4 text-xs leading-5 text-[#173b3f]/55">Berkas pada situs telah diubah ukuran dan formatnya untuk performa web. Hak cipta tetap milik fotografer masing-masing sesuai lisensi asal.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-[#173b3f]/15 bg-[#fffaf0] py-12">
+    <div class="container-site">
+      <div class="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
+        <div><img src="/assets/logo.svg" alt="Panduan Benteng Rotterdam" class="h-16 w-auto" width="520" height="120" /><p class="mt-5 max-w-md text-sm leading-6 text-[#173b3f]/65">Proyek panduan informasi wisata nirlaba yang independen untuk membantu pengunjung memahami Benteng Rotterdam dengan konteks sejarah dan informasi praktis.</p></div>
+        <div class="grid gap-7 text-sm leading-6 text-[#173b3f]/65 md:grid-cols-2">
+          <div><p class="font-black text-[#173b3f]">Pernyataan independensi</p><p class="mt-2">Situs ini merupakan proyek panduan informasi wisata nirlaba yang independen dan tidak memiliki hubungan afiliasi atau hierarki dengan Pemerintah Kota Makassar, Pemerintah Provinsi Sulawesi Selatan, Kementerian Pariwisata Republik Indonesia, pengelola Benteng Rotterdam, maupun organisasi resmi lainnya.</p></div>
+          <div><p class="font-black text-[#173b3f]">Rujukan publik</p><p class="mt-2">Informasi destinasi dirujuk dan diperiksa silang dengan publikasi Pemerintah Kota Makassar, Dinas Pariwisata Kota Makassar, Dinas Kebudayaan dan Kepariwisataan Provinsi Sulawesi Selatan, serta Kementerian Pariwisata Republik Indonesia. Tidak terdapat rekomendasi komersial berbayar.</p></div>
+        </div>
+      </div>
+      <div class="mt-10 flex flex-col gap-5 border-t border-[#173b3f]/12 pt-6 text-xs leading-5 text-[#173b3f]/60 md:flex-row md:items-end md:justify-between">
+        <div><p>Hak dan kepemilikan foto pada situs ini tetap berada pada fotografer masing-masing, sesuai lisensi yang tercantum pada bagian kredit.</p><p class="mt-1">© 2026 Panduan Benteng Rotterdam. Hak cipta dilindungi.</p></div>
+        <div class="flex flex-wrap gap-x-5 gap-y-2 font-bold text-[#173b3f]">
+          <button type="button" data-dialog="privacy-dialog" class="underline">Kebijakan Privasi</button>
+          <button type="button" data-dialog="terms-dialog" class="underline">Syarat Layanan</button>
+          <button type="button" data-dialog="cookie-dialog" class="underline">Pengaturan Cookie</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <LegalDialogs />
+  <CookieConsent />
+  <script type="application/ld+json" set:html={JSON.stringify(attractionSchema)}></script>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+</BaseLayout>
