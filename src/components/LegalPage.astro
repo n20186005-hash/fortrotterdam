@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CookieConsent from './CookieConsent.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+  updated: string;
+  /** Cookie banner ditampilkan di semua halaman, kecuali halaman pengaturan cookie itu sendiri. */
+  showBanner?: boolean;
+}
+
+const { title, description, eyebrow, updated, showBanner = true } = Astro.props;
+
+const navPages = [
+  { href: '/kebijakan-privasi/', label: 'Kebijakan Privasi' },
+  { href: '/syarat-layanan/', label: 'Syarat Layanan' },
+  { href: '/pengaturan-cookie/', label: 'Pengaturan Cookie' }
+];
+---
+<BaseLayout {title} {description}>
+  <a class="skip-link" href="#isi">Lewati ke isi utama</a>
+
+  <header class="relative z-40 border-b border-[#173b3f]/10 bg-[#f7f0df]/92 backdrop-blur">
+    <div class="container-site flex min-h-16 items-center justify-between gap-6 py-3">
+      <a href="/" aria-label="Panduan Benteng Rotterdam" class="shrink-0">
+        <img src="/assets/logo.svg" alt="Panduan Benteng Rotterdam" class="h-12 w-auto" width="520" height="120" />
+      </a>
+      <a href="/" class="rounded-full border border-[#173b3f]/25 bg-white/40 px-4 py-2 text-sm font-black hover:bg-white">Kembali ke panduan</a>
+    </div>
+  </header>
+
+  <main id="isi" class="section-space">
+    <div class="container-site max-w-3xl">
+      <a href="/" class="text-sm font-bold text-[#8a3428] hover:text-[#173b3f]">← Kembali ke panduan utama</a>
+      <p class="eyebrow mt-10">{eyebrow}</p>
+      <h1 class="mt-4 text-4xl font-bold text-[#173b3f] md:text-5xl">{title}</h1>
+      <p class="mt-4 font-semibold text-[#173b3f]/70">Terakhir diperbarui: {updated}</p>
+      <hr class="my-8 border-[#173b3f]/15" />
+      <article class="space-y-7 text-[15px] leading-7 text-[#173b3f]/82">
+        <slot />
+      </article>
+    </div>
+  </main>
+
+  <footer class="border-t border-[#173b3f]/15 bg-[#fffaf0] py-10">
+    <div class="container-site flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <p class="text-xs leading-5 text-[#173b3f]/60">© 2026 Panduan Benteng Rotterdam. Hak cipta dilindungi.</p>
+      <nav aria-label="Halaman kebijakan" class="flex flex-wrap gap-x-5 gap-y-2 text-sm font-bold text-[#173b3f]">
+        {navPages.map((page) => <a href={page.href} class="underline hover:text-[#8a3428]">{page.label}</a>)}
+      </nav>
+    </div>
+  </footer>
+
+  {showBanner && <CookieConsent />}
+</BaseLayout>

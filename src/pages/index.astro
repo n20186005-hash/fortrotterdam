@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CookieConsent from '../components/CookieConsent.astro';
-import LegalDialogs from '../components/LegalDialogs.astro';
 
 const title = 'Benteng Rotterdam Makassar — Panduan Sejarah & Kunjungan';
 const description = 'Panduan nirlaba Benteng Rotterdam di Makassar: sejarah Gowa–Tallo, Museum La Galigo, jam kunjung, biaya, transportasi, parkir, fasilitas, kuliner lokal, peta, dan FAQ.';
@@ -374,15 +373,14 @@ const faqSchema = {
       <div class="mt-10 flex flex-col gap-5 border-t border-[#173b3f]/12 pt-6 text-xs leading-5 text-[#173b3f]/60 md:flex-row md:items-end md:justify-between">
         <div><p>Hak dan kepemilikan foto pada situs ini tetap berada pada fotografer masing-masing, sesuai lisensi yang tercantum pada bagian kredit.</p><p class="mt-1">© 2026 Panduan Benteng Rotterdam. Hak cipta dilindungi.</p></div>
         <div class="flex flex-wrap gap-x-5 gap-y-2 font-bold text-[#173b3f]">
-          <button type="button" data-dialog="privacy-dialog" class="underline">Kebijakan Privasi</button>
-          <button type="button" data-dialog="terms-dialog" class="underline">Syarat Layanan</button>
-          <button type="button" data-dialog="cookie-dialog" class="underline">Pengaturan Cookie</button>
+          <a href="/kebijakan-privasi/" class="underline hover:text-[#8a3428]">Kebijakan Privasi</a>
+          <a href="/syarat-layanan/" class="underline hover:text-[#8a3428]">Syarat Layanan</a>
+          <a href="/pengaturan-cookie/" class="underline hover:text-[#8a3428]">Pengaturan Cookie</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <LegalDialogs />
   <CookieConsent />
   <script type="application/ld+json" set:html={JSON.stringify(attractionSchema)}></script>
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>

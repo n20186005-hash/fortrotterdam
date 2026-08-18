@@ -1,0 +1,42 @@
+---
+import LegalPage from '../components/LegalPage.astro';
+
+const title = 'Kebijakan Privasi';
+const description = 'Kebijakan Privasi Panduan Benteng Rotterdam: informasi yang kami kumpulkan, cara penggunaan, layanan pihak ketiga, serta hak Anda.';
+---
+<LegalPage {title} {description} eyebrow="Dokumen kebijakan" updated="Agustus 2026">
+  <p class="font-semibold text-[#173b3f]/82">Dengan mengakses Panduan Benteng Rotterdam, Anda mempercayakan data Anda kepada kami. Kebijakan ini menjelaskan secara ringkas dan jelas bagaimana kami memprosesnya.</p>
+
+  <section>
+    <h2 class="text-xl font-bold text-[#173b3f]">Informasi yang kami kumpulkan</h2>
+    <p class="mt-2">Kami membatasi pengumpulan data pada informasi yang diperlukan untuk menjalankan dan memahami penggunaan situs. Data tersebut dapat mencakup data teknis seperti alamat IP, jenis peramban, halaman yang diakses, waktu permintaan, serta Cookie atau teknologi serupa. Jika suatu saat tersedia kanal kontak dan Anda mengirimkan informasi secara sukarela, informasi tersebut hanya diproses untuk menanggapi permintaan Anda.</p>
+  </section>
+
+  <section>
+    <h2 class="text-xl font-bold text-[#173b3f]">Cara kami menggunakan informasi</h2>
+    <ul class="mt-2 list-disc space-y-1 pl-5">
+      <li>menjaga keamanan, stabilitas, dan fungsi situs;</li>
+      <li>memperbaiki isi serta pengalaman pengguna;</li>
+      <li>menganalisis pola kunjungan secara agregat bila Anda menyetujui analitik;</li>
+      <li>menanggapi permintaan yang secara sukarela Anda kirimkan; dan</li>
+      <li>memenuhi kewajiban hukum yang berlaku.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="text-xl font-bold text-[#173b3f]">Layanan pihak ketiga</h2>
+    <p class="mt-2">Situs dapat menggunakan Google Maps untuk peta lokasi dan Google Analytics 4 untuk analitik. Google Analytics hanya dimuat setelah persetujuan analitik diberikan. Peta Google tertanam dimuat secara malas saat mendekati area peta dan dapat memproses data teknis sesuai kebijakan Google. Foto disimpan secara lokal pada situs; sumber dan lisensinya dijelaskan pada bagian kredit foto.</p>
+  </section>
+
+  <section>
+    <h2 class="text-xl font-bold text-[#173b3f]">Penyimpanan dan pengendalian</h2>
+    <p class="mt-2">Pilihan persetujuan disimpan di penyimpanan lokal peramban agar situs dapat mengingat keputusan Anda. Anda dapat mengubah pilihan kapan saja melalui halaman <a href="/pengaturan-cookie/" class="font-bold text-[#8a3428] underline hover:text-[#173b3f]">Pengaturan Cookie</a>. Menghapus data situs pada peramban juga akan menghapus pilihan tersebut.</p>
+  </section>
+
+  <section>
+    <h2 class="text-xl font-bold text-[#173b3f]">Hak Anda</h2>
+    <p class="mt-2">Bergantung pada yurisdiksi Anda, termasuk GDPR bila berlaku, Anda dapat memiliki hak untuk mengakses data pribadi, meminta koreksi atau penghapusan, membatasi atau menolak pemrosesan, menarik persetujuan, serta mengajukan keluhan kepada otoritas pengawas yang berwenang.</p>
+  </section>
+
+  <p class="rounded-xl bg-[#173b3f]/7 p-4 text-sm">Panduan ini bersifat informasional dan bukan nasihat hukum. Hak serta kewajiban tertentu dapat berbeda menurut tempat tinggal dan hukum yang berlaku.</p>
+</LegalPage>
