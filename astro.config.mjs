@@ -2,8 +2,9 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Satu-satunya tempat untuk mengisi domain produksi. Biarkan kosong sebelum domain ditetapkan.
-const site = '';
+// Domain produksi sudah ditetapkan. Mengisi nilai ini mengaktifkan tag canonical,
+// URL OG absolut, sitemap, dan referensi sitemap pada robots.txt.
+const site = 'https://fortrotterdam.com';
 
 export default defineConfig({
   site: site || undefined,

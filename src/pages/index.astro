@@ -2,8 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 
-const title = 'Benteng Rotterdam Makassar — Panduan Sejarah & Kunjungan';
-const description = 'Panduan nirlaba Benteng Rotterdam di Makassar: sejarah Gowa–Tallo, Museum La Galigo, jam kunjung, biaya, transportasi, parkir, fasilitas, kuliner lokal, peta, dan FAQ.';
+const title = 'Fort Rotterdam Makassar Panduan Wisata';
+const description = 'Fort Rotterdam (Benteng Rotterdam) Makassar: jam buka 08.00–18.00, kawasan gratis tanpa tiket umum, sejarah Gowa–Tallo, Museum La Galigo, transportasi, parkir, peta, dan FAQ kunjungan.';
 const pageUrl = Astro.site ? new URL('/', Astro.site).href : undefined;
 const imageUrl = Astro.site ? new URL('/photos/halaman-tengah.webp', Astro.site).href : undefined;
 
@@ -54,6 +54,8 @@ const attractionSchema = {
     postalCode: '90171',
     addressCountry: 'ID'
   },
+  priceRange: 'Gratis',
+  isAccessibleForFree: true,
   geo: {
     '@type': 'GeoCoordinates',
     latitude: -5.133995051941352,

@@ -24,7 +24,9 @@ pnpm build
 
 ## Domain produksi
 
-Domain hanya dikonfigurasi pada variabel `site` di `astro.config.mjs`. Nilai kosong didukung: build tetap berjalan, tag URL absolut dihilangkan dengan aman, dan integrasi sitemap tidak diaktifkan. Setelah domain ditetapkan, isi nilai tersebut lalu build ulang.
+Domain dikonfigurasi pada variabel `site` di `astro.config.mjs` (saat ini `https://fortrotterdam.com`). Mengisi nilai tersebut mengaktifkan tag canonical, URL OG absolut, sitemap (`dist/sitemap-*.xml`), dan referensi sitemap pada `robots.txt`.
+
+Konsolidasi URL (HTTP→HTTPS dan www→apex) ditangani oleh `public/_redirects` (301 ke apex HTTPS) dan `public/_headers` (HSTS). Untuk lapisan DNS/edge, nyalakan **Always Use HTTPS** dan buat aturan redirect `www → apex` di dashboard Cloudflare sebagai cadangan.
 
 ## Cloudflare Workers Static Assets
 

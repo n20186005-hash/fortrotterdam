@@ -17,4 +17,4 @@ Sesudah build, pastikan hasil bersih:
 
 Proyek ini sengaja tidak memiliki `pnpm-workspace.yaml` karena merupakan proyek satu paket.
 
-`site` di `astro.config.mjs` adalah satu-satunya tempat untuk mengisi domain produksi. Selama nilainya kosong, integrasi sitemap tidak diaktifkan. Setelah domain nyata diisi, build ulang dan periksa `dist/sitemap-*.xml`; sitemap dibuat oleh `@astrojs/sitemap` dan proyek tidak menulis `lastmod` secara manual.
+`site` di `astro.config.mjs` adalah satu-satunya tempat untuk mengisi domain produksi (saat ini `https://fortrotterdam.com`). Dengan nilai terisi, integrasi sitemap aktif dan tag canonical/OG absolut dihasilkan. Setelah build, periksa `dist/sitemap-*.xml`; sitemap dibuat oleh `@astrojs/sitemap` dan proyek tidak menulis `lastmod` secara manual.
