@@ -2,19 +2,19 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 
-const title = 'Fort Rotterdam Makassar Panduan Wisata';
-const description = 'Fort Rotterdam (Benteng Rotterdam) Makassar: jam buka 08.00–18.00, kawasan gratis tanpa tiket umum, sejarah Gowa–Tallo, Museum La Galigo, transportasi, parkir, peta, dan FAQ kunjungan.';
+const title = 'Fort Rotterdam Makassar: Benteng, Museum La Galigo & Kunjungan';
+const description = 'Panduan Fort Rotterdam (Benteng Rotterdam) Makassar: sejarah Gowa–Tallo, lokasi, perbedaan jam benteng dan Museum La Galigo, sumber tarif bertanggal dan persiapan kunjungan.';
 const pageUrl = Astro.site ? new URL('/', Astro.site).href : undefined;
 const imageUrl = Astro.site ? new URL('/photos/halaman-tengah.webp', Astro.site).href : undefined;
 
 const faqItems = [
   {
     q: 'Apakah masuk ke Benteng Rotterdam berbayar?',
-    a: 'Publikasi pariwisata Sulawesi Selatan mencantumkan akses kawasan benteng tanpa tiket masuk umum. Namun Museum La Galigo, kegiatan khusus, parkir, atau layanan tertentu dapat memiliki biaya terpisah. Periksa papan informasi dan petugas saat tiba karena ketentuan dapat berubah.'
+    a: 'Berita Disbudpar Sulawesi Selatan tahun 2023 menyebut kawasan benteng gratis dan tiket Museum La Galigo Rp5.000, dengan pengelolaan berbeda. Itu referensi historis, bukan konfirmasi tarif 2026. Tanyakan biaya kawasan, museum, parkir dan kegiatan secara terpisah sebelum membayar.'
   },
   {
     q: 'Jam berapa Benteng Rotterdam buka?',
-    a: 'Daftar Google Maps yang diperiksa untuk panduan ini menampilkan 08.00–18.00 setiap hari. Beberapa sumber resmi pariwisata pernah menampilkan rentang yang berbeda. Untuk kunjungan yang bergantung pada museum atau ruang tertentu, periksa pengumuman resmi dan kondisi di lokasi pada hari kedatangan.'
+    a: 'Google Maps, diperiksa 19 Oktober 2026, mencantumkan benteng setiap hari 08.00–18.00. Basis data kebudayaan pemerintah mencantumkan Museum La Galigo Senin–Minggu 08.00–15.00. Kedua listing berbeda fasilitas dan bukan jaminan layanan pada hari kunjungan; konfirmasikan museum, ruang tertentu dan benteng kepada pengelolanya masing-masing.'
   },
   {
     q: 'Berapa lama waktu yang ideal untuk berkunjung?',
@@ -40,7 +40,7 @@ const faqItems = [
 
 const attractionSchema = {
   '@context': 'https://schema.org',
-  '@type': ['TouristAttraction', 'LocalBusiness'],
+  '@type': 'TouristAttraction',
   name: 'Benteng Rotterdam',
   alternateName: ['Fort Rotterdam', 'Benteng Ujung Pandang', 'Benteng Panyua'],
   description,
@@ -54,25 +54,12 @@ const attractionSchema = {
     postalCode: '90171',
     addressCountry: 'ID'
   },
-  priceRange: 'Gratis',
-  isAccessibleForFree: true,
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: -5.133995051941352,
-    longitude: 119.40305617689843
+    latitude: -5.1340004,
+    longitude: 119.4056311
   },
-  openingHoursSpecification: [0,1,2,3,4,5,6].map((day) => ({
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][day],
-    opens: '08:00',
-    closes: '18:00'
-  })),
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.5',
-    bestRating: '5',
-    reviewCount: '14442'
-  }
+
 };
 
 const faqSchema = {
@@ -93,7 +80,7 @@ const faqSchema = {
       <a href="#atas" aria-label="Kembali ke awal" class="shrink-0">
         <img src="/assets/logo.svg" alt="Panduan Benteng Rotterdam" class="h-14 w-auto md:h-16" width="520" height="120" />
       </a>
-      <nav aria-label="Navigasi utama" class="hidden items-center gap-6 text-sm font-bold lg:flex">
+      <nav aria-label="Navigasi utama" class="main-nav flex flex-wrap items-center gap-6 text-sm font-bold">
         <a href="#sejarah" class="hover:text-[#8a3428]">Sejarah</a>
         <a href="#kunjungan" class="hover:text-[#8a3428]">Kunjungan</a>
         <a href="#transportasi" class="hover:text-[#8a3428]">Transportasi</a>
@@ -110,7 +97,7 @@ const faqSchema = {
       <div class="container-site grid items-center gap-12 lg:grid-cols-[1.02fr_.98fr]">
         <div class="relative z-10">
           <p class="eyebrow">Cagar sejarah · Makassar, Sulawesi Selatan</p>
-          <h1 class="display-title mt-5 max-w-[820px] text-[#173b3f]">Benteng<br/><span class="text-[#8a3428]">Rotterdam</span></h1>
+          <h1 class="display-title mt-5 max-w-[820px] text-[#173b3f]">Benteng<br/><span class="text-[#8a3428]">Rotterdam</span><small class="mt-4 block text-2xl tracking-normal">Makassar · Fort Rotterdam</small></h1>
           <p class="serif mt-7 max-w-2xl text-xl leading-8 text-[#173b3f]/80 md:text-2xl">Benteng Panyua—jejak maritim Gowa–Tallo, perubahan kota pelabuhan, dan lapisan sejarah kolonial di jantung Makassar.</p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a href="#sejarah" class="rounded-full bg-[#8a3428] px-6 py-3 text-sm font-black text-white hover:bg-[#173b3f]">Mulai dari sejarah</a>
@@ -140,8 +127,8 @@ const faqSchema = {
     <section class="bg-[#173b3f] py-8 text-[#fffaf0]">
       <div class="container-site grid gap-6 md:grid-cols-4">
         <div><p class="text-xs font-black uppercase tracking-widest text-[#e3ba76]">Alamat</p><p class="mt-2 text-sm leading-6">Jl. Ujung Pandang, Bulo Gading, Kec. Ujung Pandang, Kota Makassar 90171</p></div>
-        <div><p class="text-xs font-black uppercase tracking-widest text-[#e3ba76]">Jam pada daftar peta</p><p class="mt-2 text-lg font-black">08.00–18.00</p><p class="text-xs text-white/60">Setiap hari · dapat berubah</p></div>
-        <div><p class="text-xs font-black uppercase tracking-widest text-[#e3ba76]">Biaya kawasan</p><p class="mt-2 text-lg font-black">Tanpa tiket umum*</p><p class="text-xs text-white/60">Museum/kegiatan/parkir dapat terpisah</p></div>
+        <div><p class="text-xs font-black uppercase tracking-widest text-[#e3ba76]">Jam pada daftar peta</p><p class="mt-2 text-lg font-black">08.00–18.00</p><p class="text-xs text-white/60">Maps · 19 Oktober 2026; khusus benteng</p></div>
+        <div><p class="text-xs font-black uppercase tracking-widest text-[#e3ba76]">Biaya kawasan</p><p class="mt-2 text-lg font-black">Konfirmasi biaya saat ini</p><p class="text-xs text-white/60">Museum/kegiatan/parkir dapat terpisah</p></div>
         <div><p class="text-xs font-black uppercase tracking-widest text-[#e3ba76]">Waktu kunjungan</p><p class="mt-2 text-lg font-black">1,5–2,5 jam</p><p class="text-xs text-white/60">Jika termasuk museum</p></div>
       </div>
     </section>
@@ -163,7 +150,7 @@ const faqSchema = {
             <span class="absolute -left-[52px] top-1 flex size-7 items-center justify-center rounded-full bg-[#8a3428] text-[10px] font-black text-white">01</span>
             <p class="eyebrow">1545 · Kerajaan Gowa</p>
             <h3 class="mt-2 text-3xl font-bold">Benteng Ujung Pandang dibangun</h3>
-            <p class="mt-3 leading-7 text-[#173b3f]/72">Sumber pariwisata nasional mencatat pembangunan pada masa Raja Gowa ke-10, I Manrigau Daeng Bonto Karaeng Lakiung Tunipalangga Ulaweng. Benteng menjadi bagian dari sistem pertahanan dan jaringan kota-pelabuhan Gowa–Tallo.</p>
+            <p class="mt-3 leading-7 text-[#173b3f]/72">Sumber pariwisata nasional mencatat pembangunan pada 1545 pada masa Kerajaan Gowa. Penomoran raja berbeda antar sumber pemerintah, sehingga panduan ini tidak menetapkan satu nomor. Benteng menjadi bagian dari sistem pertahanan dan jaringan kota-pelabuhan Gowa–Tallo.</p>
           </article>
           <article class="relative">
             <span class="absolute -left-[52px] top-1 flex size-7 items-center justify-center rounded-full bg-[#8a3428] text-[10px] font-black text-white">02</span>
@@ -216,8 +203,8 @@ const faqSchema = {
         </div>
 
         <div class="mt-12 grid gap-px overflow-hidden rounded-[30px] border border-[#173b3f]/12 bg-[#173b3f]/12 sm:grid-cols-2 lg:grid-cols-4">
-          <article class="bg-[#fffaf0] p-6"><p class="eyebrow">Jam</p><h3 class="mt-3 text-2xl font-bold">08.00–18.00</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/65">Daftar peta saat ini. Sumber resmi berbeda pernah mencantumkan rentang lain; cek kembali sebelum datang.</p></article>
-          <article class="bg-[#fffaf0] p-6"><p class="eyebrow">Biaya</p><h3 class="mt-3 text-2xl font-bold">Kawasan: gratis*</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/65">Museum, acara, parkir, atau layanan khusus dapat memiliki biaya terpisah. Siapkan pembayaran kecil seperlunya.</p></article>
+          <article class="bg-[#fffaf0] p-6"><p class="eyebrow">Jam</p><h3 class="mt-3 text-2xl font-bold">08.00–18.00</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/65">Maps 19 Oktober 2026, khusus benteng. Basis data pemerintah untuk Museum La Galigo mencantumkan 08.00–15.00 setiap hari; konfirmasikan masing-masing fasilitas.</p></article>
+          <article class="bg-[#fffaf0] p-6"><p class="eyebrow">Biaya</p><h3 class="mt-3 text-2xl font-bold">Referensi tarif 2023</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/65">Berita provinsi 2023: benteng gratis, museum Rp5.000. Tarif 2026, kategori pengunjung dan biaya lain belum dikonfirmasi; tanyakan masing-masing pengelola.</p></article>
           <article class="bg-[#fffaf0] p-6"><p class="eyebrow">Durasi</p><h3 class="mt-3 text-2xl font-bold">60–150 menit</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/65">Kunjungan singkat untuk benteng; tambah waktu jika membaca koleksi Museum La Galigo.</p></article>
           <article class="bg-[#fffaf0] p-6"><p class="eyebrow">Waktu nyaman</p><h3 class="mt-3 text-2xl font-bold">Pagi / sore</h3><p class="mt-3 text-sm leading-6 text-[#173b3f]/65">Pagi cenderung lebih sejuk; sore membantu mengurangi paparan panas. Bawa air, topi, dan pelindung matahari.</p></article>
         </div>
@@ -313,12 +300,12 @@ const faqSchema = {
             <p class="mt-5 leading-7 text-white/75">Jl. Ujung Pandang, Bulo Gading, Kec. Ujung Pandang, Kota Makassar, Sulawesi Selatan 90171, Indonesia.</p>
           </div>
           <div class="mt-10 border-t border-white/20 pt-5 text-sm leading-6 text-white/70">
-            <p><strong class="text-white">Koordinat:</strong><br/>-5.133995, 119.403056</p>
+            <p><strong class="text-white">Koordinat:</strong><br/>-5.1340004, 119.4056311</p>
             <a href="https://maps.app.goo.gl/scD13PUJ1NsUtpGr8" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex rounded-full bg-white px-5 py-2.5 font-black text-[#8a3428]">Buka rute di Google Maps</a>
           </div>
         </div>
         <div class="map-wrap min-h-[450px] overflow-hidden rounded-[32px] border border-[#173b3f]/15 bg-[#d8ccb1]">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6866.20859242991!2d119.40305617689843!3d-5.133995051941352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbf02b011ce37ef%3A0x28ed3928c1b6cf23!2sFort%20Rotterdam!5e1!3m2!1sid!2sid!4v1787019897554!5m2!1sid!2sid&hl=id" title="Peta Benteng Rotterdam di Makassar" width="600" height="450" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6866.20859242991!2d119.4056311!3d-5.1340004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbf02b011ce37ef%3A0x28ed3928c1b6cf23!2sFort%20Rotterdam!5e1!3m2!1sid!2sid!4v1787019897554!5m2!1sid!2sid&hl=id" title="Peta Benteng Rotterdam di Makassar" width="600" height="450" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
       </div>
     </section>
@@ -341,9 +328,15 @@ const faqSchema = {
       <div class="container-site grid gap-10 lg:grid-cols-2">
         <div>
           <p class="eyebrow">Sumber & metodologi</p>
-          <h2 class="mt-4 text-4xl font-bold">Informasi diperiksa silang.</h2>
+          <h2 class="mt-4 text-4xl font-bold">Sumber bertanggal, fasilitas berbeda.</h2>
+          <ul class="mt-5 space-y-3 text-sm leading-7">
+            <li><a class="underline" href="https://www.indonesia.travel/id/en/destination/sulawesi/south-sulawesi/benteng-rotterdam">Indonesia Travel: sejarah benteng 1545</a> · <a class="underline" href="https://www.indonesia.travel/id/en/travel-ideas/heritage/benteng-fort-rotterdam-peninggalan-sejarah-dari-kerajaan-gowa-tallo">Bungaya 1667 dan Museum La Galigo</a>.</li>
+            <li><a class="underline" href="https://disbudpar.sulselprov.go.id/page/readmore/231/berkunjung-ke-museum-la-galigo-cuma-rp-5-ribu-disbudpar-sulsel-jamin-bebas-pungli">Disbudpar Sulsel, berita 2023</a>: benteng gratis dan museum Rp5.000 pada saat laporan, dengan pengelolaan berbeda. Bukan jaminan tarif Oktober 2026.</li>
+            <li><a class="underline" href="https://budaya.data.kemdikbud.go.id/lembaga/objek/MS000398">Basis data pemerintah Museum La Galigo</a>: Senin–Minggu 08.00–15.00. <a class="underline" href="https://lagaligo-disbudpar.sulselprov.go.id/">Situs Museum La Galigo</a> untuk konfirmasi layanan.</li>
+            <li><a class="underline" href="https://maps.app.goo.gl/scD13PUJ1NsUtpGr8">Maps, diperiksa 19 Oktober 2026</a>: benteng 08.00–18.00 setiap hari. Jangan samakan listing benteng dengan jam museum atau semua ruang.</li>
+          </ul>
           <p class="mt-4 leading-7 text-[#173b3f]/70">Panduan membandingkan publikasi Pemerintah Kota Makassar, Dinas Pariwisata Kota Makassar, Dinas Kebudayaan dan Kepariwisataan Provinsi Sulawesi Selatan, Kementerian Pariwisata Republik Indonesia, informasi lokasi Google Maps, serta sumber kebudayaan publik. Jika sumber operasional berbeda, kami menandai ketidakpastian alih-alih menyamarkannya.</p>
-          <p class="mt-4 rounded-2xl border border-[#8a3428]/20 bg-[#8a3428]/6 p-4 text-sm leading-6"><strong>Catatan peringkat:</strong> angka 4,5/5 dan jumlah ulasan pada data terstruktur berasal dari daftar Google Maps yang diperiksa saat penyusunan. Peringkat adalah data pihak ketiga yang dinamis dan dapat berubah.</p>
+          <p class="mt-4 rounded-2xl border border-[#8a3428]/20 bg-[#8a3428]/6 p-4 text-sm leading-6"><strong>Catatan peringkat:</strong> Google Maps yang diperiksa 19 Oktober 2026 menampilkan 4,5/5 dari 14.486 ulasan. Ini penilaian pihak ketiga, bukan ulasan yang dikumpulkan panduan ini.</p>
         </div>
         <div>
           <p class="eyebrow">Kredit foto</p>
@@ -384,6 +377,6 @@ const faqSchema = {
   </footer>
 
   <CookieConsent />
-  <script type="application/ld+json" set:html={JSON.stringify(attractionSchema)}></script>
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(attractionSchema)}></script>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
 </BaseLayout>
