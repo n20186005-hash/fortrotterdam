@@ -1,4 +1,5 @@
 <div id="cookie-banner" class="cookie-banner rounded-2xl border border-white/20 bg-[#173b3f] p-5 text-[#fffaf0] md:p-6" hidden>
+  <p data-cookie-status role="status" aria-live="polite"></p>
   <div class="grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
     <div>
       <p class="text-sm font-black uppercase tracking-[.16em] text-[#e3ba76]">Privasi & Cookie</p>
@@ -53,14 +54,19 @@
   };
 
   const saveConsent = (value: ConsentValue) => {
-    localStorage.setItem(CONSENT_KEY, JSON.stringify({ ...value, savedAt: new Date().toISOString() }));
     applyConsent(value);
-    if (banner) banner.hidden = true;
+    let persisted = false;
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ ...value, savedAt: new Date().toISOString() })); persisted = true; } catch {}
+    if (banner) {
+      banner.hidden = persisted;
+      const note = banner.querySelector('[data-cookie-status]');
+      if (note) note.textContent = persisted ? '' : 'Pilihan berlaku untuk halaman ini saja; penyimpanan peramban tidak tersedia.';
+    }
   };
 
   const current = readConsent();
   if (current) applyConsent(current);
-  else if (banner) banner.hidden = false;
+  else { applyConsent({analytics:false,preferences:false}); if (banner) banner.hidden = false; }
 
   document.getElementById('cookie-essential')?.addEventListener('click', () => saveConsent({ analytics: false, preferences: false }));
   document.getElementById('cookie-accept')?.addEventListener('click', () => saveConsent({ analytics: true, preferences: false }));

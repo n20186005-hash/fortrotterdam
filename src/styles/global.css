@@ -79,3 +79,8 @@ a { text-underline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; animation-duration: .001ms !important; transition-duration: .001ms !important; }
 }
+
+.grid > * { min-width:0; }
+main :is(h1,h2,h3,p,li,dd) { overflow-wrap:anywhere; }
+header a, footer nav a, .cookie-banner button, .cookie-banner a { display:inline-flex; align-items:center; min-height:44px; }
+@media(max-width:1023px){header > .container-site { flex-wrap:wrap; gap:12px; } .main-nav { order:3; width:100%; gap:4px 18px; }}

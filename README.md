@@ -26,7 +26,7 @@ pnpm build
 
 Domain dikonfigurasi pada variabel `site` di `astro.config.mjs` (saat ini `https://fortrotterdam.com`). Mengisi nilai tersebut mengaktifkan tag canonical, URL OG absolut, sitemap (`dist/sitemap-*.xml`), dan referensi sitemap pada `robots.txt`.
 
-Konsolidasi URL (HTTP→HTTPS dan www→apex) ditangani oleh `public/_redirects` (301 ke apex HTTPS) dan `public/_headers` (HSTS). Untuk lapisan DNS/edge, nyalakan **Always Use HTTPS** dan buat aturan redirect `www → apex` di dashboard Cloudflare sebagai cadangan.
+Konsolidasi URL HTTP→HTTPS dan www→apex ditangani oleh `src/worker.js`, dengan path dan query dipertahankan. ASSETS menyajikan build statis dan respons 404 diberi noindex. `public/_headers` memuat HSTS.
 
 ## Cloudflare Workers Static Assets
 

@@ -9,7 +9,7 @@ const site = 'https://fortrotterdam.com';
 export default defineConfig({
   site: site || undefined,
   output: 'static',
-  integrations: site ? [sitemap()] : [],
+  integrations: site ? [sitemap({filter:(page)=>!page.endsWith('/404/')})] : [],
   vite: {
     plugins: [tailwindcss()]
   }
